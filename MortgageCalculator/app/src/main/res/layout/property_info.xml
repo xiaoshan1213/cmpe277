@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Property Type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/propertySpinner"
+        android:entries="@array/property_type"/>
+
+    <TextView
+        android:text="Street Address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="street address"
+        android:ems="10"
+        android:id="@+id/streetAdds" />
+
+    <TextView
+        android:text="City"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="city"
+        android:ems="10"
+        android:id="@+id/city" />
+
+    <TextView
+        android:text="State"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView9" />
+
+   <Spinner
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/stateSpinner"
+       android:entries="@array/states"/>
+
+    <TextView
+        android:text="Zipcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="zipcode"
+        android:ems="10"
+        android:id="@+id/zipcode"
+        android:inputType="numberSigned" />
+
+    <Button
+        android:text="save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSaveProperty" />
+</LinearLayout>
