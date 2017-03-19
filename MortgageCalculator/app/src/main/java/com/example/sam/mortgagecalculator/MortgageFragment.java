@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -21,8 +20,8 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
     public static final String ARG_PLANET_NUMBER = "planet_number";
     private View view;
     private int years;
-    private float loan;
-    private float apr;
+    private double loan;
+    private double apr;
     private double monthlypay;
 
     public MortgageFragment() {
@@ -33,7 +32,9 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mortgage, container, false);
-        int i = getArguments().getInt(ARG_PLANET_NUMBER);
+        int i=0;
+        if(getArguments()!=null)
+            i = getArguments().getInt(ARG_PLANET_NUMBER);
         String title = getResources().getStringArray(R.array.title_arr)[i];
         getActivity().setTitle(title);
         Button btnCal = (Button)view.findViewById(R.id.btnCalculate);
@@ -62,51 +63,28 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
                 Bundle bundle = new Bundle();
                 FragmentManager fragmentManager = getFragmentManager();
                 bundle.putDouble("loan", this.loan);
-                bundle.putFloat("apr",this.apr);
+                bundle.putDouble("apr",this.apr);
                 bundle.putDouble("monthlypay", this.monthlypay);
                 Toast.makeText(getActivity(), this.monthlypay + "", Toast.LENGTH_SHORT).show();
                 fragment_output.setArguments(bundle);
                 Log.d("tag", apr+"");
+                Log.d("mortgageFrag", String.valueOf(this.loan));
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment_output).commit();
                 break;
         }
 
     }
 
-    public void handleCalculate(View view){
+    public void handleCalculate(View view) {
         float propertyPrice = Float.parseFloat(((EditText) view.findViewById(R.id.propertyPrice)).getText().toString());
         float downPayment = Float.parseFloat(((EditText) view.findViewById(R.id.downPayment)).getText().toString());
-        float apr = Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString()) / 1200 ;
+        float apr = Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString()) / 1200;
         int months = this.years * 12;
         float loan = propertyPrice - downPayment;
         this.loan = loan;
         this.apr = apr;
-        double pow = Math.pow(1+apr, months);
-        this.monthlypay = (double)apr * pow * (double)loan / (pow - 1);
-//        Toast.makeText(getActivity(), this.monthlypay+"", Toast.LENGTH_SHORT).show();
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
+        double pow = Math.pow(1 + apr, months);
+        this.monthlypay = (double) apr * pow * (double) loan / (pow - 1);
     }
 
-//    public void onRadioButtonClicked(View view) {
-//        // Is the button now checked?
-//        boolean checked = ((RadioButton) view).isChecked();
-//
-//        // Check which radio button was clicked
-//        switch(view.getId()) {
-//            case R.id.terms_15:
-//                if (checked) {
-//                    // Pirates are the best
-//                    years = 15;
-//                    break;
-//                }
-//            case R.id.terms_30:
-//                if (checked) {
-//                    // Ninjas rule
-//                    years = 30;
-//                    break;
-//                }
-//        }
-//        return ;
-//    }
 }

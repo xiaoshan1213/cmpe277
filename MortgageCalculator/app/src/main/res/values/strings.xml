@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Navigation Drawer Example</string>
+    <string name="app_name">Mortgage Calculator</string>
     <string-array name="title_arr">
         <item>Loan Info</item>
         <item>Map</item>

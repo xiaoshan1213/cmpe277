@@ -15,8 +15,8 @@ import android.widget.TextView;
  */
 
 public class OutputFragment extends Fragment implements View.OnClickListener{
-    private float loan;
-    private float apr;
+    private double loan;
+    private double apr;
     private double monthlypay;
     private View view;
 
@@ -28,8 +28,8 @@ public class OutputFragment extends Fragment implements View.OnClickListener{
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             this.monthlypay = bundle.getDouble("monthlypay", 0.0);
-            this.apr = bundle.getFloat("apr", 0);
-            this.loan = bundle.getFloat("loan", 0);
+            this.apr = bundle.getDouble("apr", 0);
+            this.loan = bundle.getDouble("loan", 0);
         }
     }
 
@@ -51,9 +51,10 @@ public class OutputFragment extends Fragment implements View.OnClickListener{
         Bundle bundle = new Bundle();
         FragmentManager fragmentManager = getFragmentManager();
         bundle.putDouble("loan", this.loan);
-        bundle.putFloat("apr",this.apr);
+        bundle.putDouble("apr",this.apr);
         bundle.putDouble("monthlypay", this.monthlypay);
         fragmentProperty.setArguments(bundle);
+        Log.d("outputfragment", String.valueOf(this.loan));
         Log.d("tag", apr+"");
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentProperty).commit();
     }

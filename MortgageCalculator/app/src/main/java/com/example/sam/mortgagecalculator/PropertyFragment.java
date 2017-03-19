@@ -2,11 +2,7 @@ package com.example.sam.mortgagecalculator;
 
 import android.app.Fragment;
 import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,25 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.LatLng;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -70,11 +52,11 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
             this.monthlypay = bundle.getDouble("monthlypay", 0.0);
             this.loan = bundle.getDouble("loan", 0.0);
             this.apr = bundle.getFloat("apr", 0);
+            Log.d("propertyfrag", String.valueOf(this.loan));
         }
         getActivity().setTitle("PropertyInfo");
         Button btnsaveproperty = (Button)view.findViewById(R.id.btnSaveProperty);
         btnsaveproperty.setOnClickListener(this);
-        Toast.makeText(getActivity(), this.monthlypay+","+this.loan+","+this.apr+"", Toast.LENGTH_SHORT).show();
         return view;
     }
 
