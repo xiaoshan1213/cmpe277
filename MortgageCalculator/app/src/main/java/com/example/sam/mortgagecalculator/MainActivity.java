@@ -17,22 +17,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
 
+
+import java.lang.reflect.Array;
+
+
+public class MainActivity extends Activity /*implements OnMapReadyCallback */{
+
+    private int LOAN_INFO_POSITION;
+    private int MAP_POSITION;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] titles;
-    private int years;
-    private double monthlypay;
-    private double loan;
-    private float apr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +46,15 @@ public class MainActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         titles = getResources().getStringArray(R.array.title_arr);
+        LOAN_INFO_POSITION = getResources().getInteger(R.integer.loan_info_position);
+        MAP_POSITION = getResources().getInteger(R.integer.map_position);
+
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, titles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        MortgageHelper db = new MortgageHelper(this);
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -131,15 +136,25 @@ public class MainActivity extends Activity {
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        if(position == 0){
-            Fragment fragment = new MortgageFragment();
-            Bundle args = new Bundle();
-            args.putInt(MortgageFragment.ARG_PLANET_NUMBER, position);
-            fragment.setArguments(args);
+        Fragment fragment;
+        Bundle args;
+
+        if (LOAN_INFO_POSITION == position) {
+            fragment = new MortgageFragment();
+            String title = getResources().getStringArray(R.array.title_arr)[position];
+            setTitle(title);
+
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-        }else {
-            Fragment fragment = new MapFragment();
+        }
+
+
+        if (MAP_POSITION == position) {
+            fragment = new MapFragment();
+            String title = getResources().getStringArray(R.array.title_arr)[position];
+            setTitle(title);
+            //((MapFragment)fragment).getMapAsync(this);
+
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         }
@@ -169,34 +184,6 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-
-    public void handleCalculate(View view){
-        float propertyPrice = Float.parseFloat(((EditText) findViewById(R.id.propertyPrice)).getText().toString());
-        float downPayment = Float.parseFloat(((EditText) findViewById(R.id.downPayment)).getText().toString());
-        float apr = Float.parseFloat(((EditText) findViewById(R.id.apr)).getText().toString()) / 1200 ;
-        int months = this.years * 12;
-        float loan = propertyPrice - downPayment;
-        this.loan = loan;
-        this.apr = apr;
-        double pow = Math.pow(1+apr, months);
-        this.monthlypay = apr * pow * loan / (pow - 1);
-        Fragment fragment_output = new OutputFragment();
-
-        Bundle args = new Bundle();
-        fragment_output.setArguments(args);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment_output).commit();
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-    }
-
-    public void handlePropertyInfo(View view){
-        Fragment fragment = new PropertyFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
 

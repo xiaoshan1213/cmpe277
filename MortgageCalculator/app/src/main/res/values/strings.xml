@@ -20,6 +20,8 @@
         <item>Loan Info</item>
         <item>Map</item>
     </string-array>
+    <integer name="loan_info_position">0</integer>
+    <integer name="map_position">1</integer>
     <string-array name="property_type">
         <item>House</item>
         <item>Townhouse</item>

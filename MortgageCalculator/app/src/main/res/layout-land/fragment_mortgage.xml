@@ -1,47 +1,32 @@
 
-
-<!--<ImageView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@+id/image"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="#000000"-->
-    <!--android:gravity="center"-->
-    <!--android:padding="32dp" />-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mortgage"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Property Type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/propertySpinner"
-        android:entries="@array/property_type"/>
-
-    <TextView
-        android:text="Street Address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="street address"
-        android:ems="10"
-        android:maxLength="40"
-        android:id="@+id/streetAdds" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="Property Type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/propertySpinner"
+                android:entries="@array/property_type"/>
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -107,49 +92,91 @@
 
     </LinearLayout>
 
-    <TextView
-        android:text="Property Price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="price"
-        android:ems="10"
-        android:maxLength="10"
-        android:id="@+id/propertyPrice"
-        android:inputType="numberSigned|numberDecimal" />
 
     <TextView
-        android:text="Down Payment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
-        android:hint="dollar"
-        android:ems="10"
-        android:maxLength="10"
-        android:id="@+id/downPayment" />
-
-    <TextView
-        android:text="Annual Percentage Rage (%)"
+        android:text="Street Address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
-        android:hint="apr"
+        android:inputType="textPersonName"
+        android:hint="street address"
         android:ems="10"
-        android:maxLength="5"
-        android:id="@+id/apr" />
+        android:maxLength="40"
+        android:id="@+id/streetAdds" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="Property Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="price"
+                android:ems="10"
+                android:maxLength="10"
+                android:id="@+id/propertyPrice"
+                android:inputType="numberSigned|numberDecimal" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="Down Payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned|numberDecimal"
+                android:hint="dollar"
+                android:ems="10"
+                android:maxLength="10"
+                android:id="@+id/downPayment" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="Annual Percentage Rage (%)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned|numberDecimal"
+                android:hint="apr"
+                android:ems="10"
+                android:maxLength="5"
+                android:id="@+id/apr" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:text="Terms"
