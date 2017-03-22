@@ -242,11 +242,11 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         downPayment = Float.parseFloat(((EditText) view.findViewById(R.id.downPayment)).getText().toString());
         apr = Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString());
 
-        if (apr > 100) {
+      /*  if (apr) {
             alertDialog("APR cannot exceed 100%.");
             return false;
         }
-
+*/
         if (downPayment > propertyPrice) {
             alertDialog("Down payment cannot be larger than property price.");
             return false;
@@ -370,7 +370,7 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         // Insert the new row, returning the primary key value of the new row
         db.insertWithOnConflict(MortgageSchema.MortgageEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
-        Toast.makeText(getActivity(), "save", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
     }
 
     private boolean needOldPropertyInfo() throws JSONException{

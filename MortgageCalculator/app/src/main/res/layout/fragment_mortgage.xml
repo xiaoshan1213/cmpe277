@@ -7,33 +7,185 @@
     <!--android:background="#000000"-->
     <!--android:gravity="center"-->
     <!--android:padding="32dp" />-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mortgage"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textColorHint="@android:color/black"
 
+    android:background="#b7b7b7">
+    <TextView
+        android:text="Loan Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:text="Property Price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="price"
+        android:textColor="#000000"
+        android:ems="10"
+        android:maxLength="10"
+        android:id="@+id/propertyPrice"
+        android:backgroundTint="@android:color/background_dark"
+        android:inputType="numberSigned|numberDecimal"/>
+
+    <TextView
+        android:text="Down Payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:hint="dollar"
+        android:textColor="#000000"
+        android:ems="10"
+        android:maxLength="10"
+        android:backgroundTint="@android:color/background_dark"
+        android:id="@+id/downPayment" />
+
+    <TextView
+        android:text="Annual Percentage Rage (%)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:hint="apr"
+        android:textColor="#000000"
+        android:ems="10"
+        android:maxLength="5"
+        android:id="@+id/apr" />
+
+    <TextView
+        android:text="Terms"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/rg">
+        <RadioButton
+            android:text="15 years"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/terms_15" />
+
+        <RadioButton
+            android:text="30 years"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/terms_30" />
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:fontFamily="@string/common_google_play_services_enable_title"
+            android:layout_marginTop="10pt"
+            android:textColor="#000000"
+            android:text="Monthly Payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:text=""
+            android:layout_marginTop="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:id="@+id/paymentholder"
+            android:hint = "      N/A"
+
+            android:textSize="7pt" />
+
+        <Button
+            android:text="calculate"
+            android:textColor="#ffffff"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/roundbutton"
+            android:layout_gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCalculate"
+            />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:text="Property Info"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/black"/>
     <TextView
         android:text="Property Type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:id="@+id/propertySpinner"
         android:entries="@array/property_type"/>
 
     <TextView
         android:text="Street Address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/common_google_play_services_enable_title"
+        android:textColor="#000000"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="street address"
+        android:textColor="#000000"
+
         android:ems="10"
         android:maxLength="40"
         android:id="@+id/streetAdds" />
@@ -51,6 +203,8 @@
 
             <TextView
                 android:text="City"
+                android:fontFamily="@string/common_google_play_services_enable_title"
+                android:textColor="#000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -59,6 +213,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="city"
+                android:textColor="#000000"
+
                 android:ems="10"
                 android:maxLength="15"
                 android:id="@+id/city" />
@@ -68,17 +224,22 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/city"
             android:layout_weight="1">
 
             <TextView
                 android:text="State"
+                android:fontFamily="@string/common_google_play_services_enable_title"
+                android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/stateSpinner"
+                android:textColor="#000000"
+
                 android:entries="@array/states"/>
 
         </LinearLayout>
@@ -91,6 +252,9 @@
 
             <TextView
                 android:text="Zipcode"
+                android:fontFamily="@string/common_google_play_services_enable_title"
+                android:textColor="#000000"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -99,82 +263,16 @@
                 android:layout_height="wrap_content"
                 android:hint="zipcode"
                 android:ems="10"
+                android:textColor="#000000"
+
                 android:maxLength="5"
                 android:id="@+id/zipcode"
                 android:inputType="numberSigned" />
 
         </LinearLayout>
 
-    </LinearLayout>
 
-    <TextView
-        android:text="Property Price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="price"
-        android:ems="10"
-        android:maxLength="10"
-        android:id="@+id/propertyPrice"
-        android:inputType="numberSigned|numberDecimal" />
-
-    <TextView
-        android:text="Down Payment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
-        android:hint="dollar"
-        android:ems="10"
-        android:maxLength="10"
-        android:id="@+id/downPayment" />
-
-    <TextView
-        android:text="Annual Percentage Rage (%)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
-        android:hint="apr"
-        android:ems="10"
-        android:maxLength="5"
-        android:id="@+id/apr" />
-
-    <TextView
-        android:text="Terms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/rg">
-        <RadioButton
-            android:text="15 years"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/terms_15" />
-
-        <RadioButton
-            android:text="30 years"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/terms_30" />
-    </RadioGroup>
-
+</LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,44 +281,25 @@
 
         <Button
             android:text="save"
+            android:textColor="#ffffff"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
+            android:background="@drawable/roundbutton"
             android:layout_height="wrap_content"
             android:id="@+id/btnSaveProperty" />
-
-        <Button
-            android:text="calculate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnCalculate"/>
-
-
-        <Button
+          <Button
             android:text="new"
+            android:textColor="#ffffff"
+            android:background="@drawable/roundbutton"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnNew" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:text="Monthly Payment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10pt" />
-
-        <TextView
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/paymentholder"
-            android:hint = "      N/A"
-            android:textSize="10pt" />
-    </LinearLayout>
 
 
 </LinearLayout>

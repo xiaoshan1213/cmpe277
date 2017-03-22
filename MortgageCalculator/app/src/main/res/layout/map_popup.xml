@@ -3,7 +3,7 @@
     android:id="@+id/popup_element"
     android:layout_width="fill_parent"
     android:layout_height="200dp"
-    android:background="@android:color/transparent"
+    android:background="#f0be72"
     android:orientation="vertical"
     android:padding="3dp">
 
@@ -18,10 +18,14 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="property type"
-                android:padding="3dip" />
+                android:textColor="#000000"
+                android:fontFamily="casual"
+                  android:padding="3dip" />
             <TextView
                 android:text="house"
-                android:id="@+id/contentPT"
+                android:fontFamily="casual"
+                android:textColor="#000000"
+                 android:id="@+id/contentPT"
                 android:gravity="center"
                 android:padding="3dip" />
         </TableRow>
@@ -31,9 +35,12 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="street address"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:padding="3dip" />
             <TextView
                 android:text="house"
+                android:fontFamily="casual" android:textColor="#000000"
                 android:id="@+id/contentSA"
                 android:gravity="center"
                 android:padding="3dip" />
@@ -44,9 +51,12 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="city"
+                android:fontFamily="casual" android:textColor="#000000"
                 android:padding="3dip" />
             <TextView
                 android:text="house"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:id="@+id/contentCity"
                 android:gravity="center"
                 android:padding="3dip" />
@@ -57,9 +67,13 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="loan amount"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:padding="3dip" />
             <TextView
                 android:text="house"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:id="@+id/contentLoan"
                 android:gravity="center"
                 android:padding="3dip" />
@@ -70,9 +84,13 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="apr"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:padding="3dip" />
             <TextView
                 android:text="house"
+                android:fontFamily="casual"
+                android:textColor="#000000"
                 android:id="@+id/contentAPR"
                 android:gravity="center"
                 android:padding="3dip" />
@@ -83,17 +101,19 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="monthly payment"
-                android:padding="3dip" />
+                android:fontFamily="casual"
+                android:textColor="#000000"   android:padding="3dip" />
             <TextView
                 android:text="house"
-                android:id="@+id/contentMP"
+                android:fontFamily="casual"
+                android:textColor="#000000"  android:id="@+id/contentMP"
                 android:gravity="center"
                 android:padding="3dip" />
         </TableRow>
 
     </TableLayout>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/textContent"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -101,9 +121,11 @@
         android:layout_weight="1"
         android:gravity="center_horizontal|center_vertical"
         android:text="Take Photo"
+        android:fontFamily="casual"
+
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp" />
+        android:textSize="14sp" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -113,27 +135,35 @@
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="15pt"
             android:layout_gravity="center_horizontal"
+            android:layout_marginRight="2pt"
             android:layout_weight="1"
             android:text="edit"
-            android:textColor="#3A86CF" />
+            android:textColor="@android:color/white"
+            android:background="@drawable/roundbutton"/>
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="15pt"
+            android:layout_marginRight="2pt"
+            android:layout_marginLeft="2pt"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:text="delete"
-            android:textColor="#3A86CF" />
+            android:textColor="@android:color/white"
+            android:background="@drawable/roundbutton"/>
         <Button
             android:id="@+id/btnCancel"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="15pt"
+            android:layout_marginLeft="2pt"
             android:layout_gravity="center_horizontal"
             android:text="Cancel"
-            android:textColor="#3A86CF"
+
+            android:textColor="@android:color/white"
+            android:background="@drawable/roundbutton"
             android:textSize="16sp" />
     </LinearLayout>
 

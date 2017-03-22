@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -59,6 +60,7 @@ public class MainActivity extends Activity /*implements OnMapReadyCallback */{
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
+
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -97,7 +99,6 @@ public class MainActivity extends Activity /*implements OnMapReadyCallback */{
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -110,17 +111,6 @@ public class MainActivity extends Activity /*implements OnMapReadyCallback */{
         }
         // Handle action buttons
         switch(item.getItemId()) {
-        case R.id.action_websearch:
-            // create intent to perform web search for this planet
-            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-            intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-            // catch event that there's no activity to handle intent
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-            }
-            return true;
         default:
             return super.onOptionsItemSelected(item);
         }
