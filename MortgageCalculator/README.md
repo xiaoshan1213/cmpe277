@@ -1,1 +1,1 @@
-![Alt text](/MortgageCalculator/screenshots/main.png?raw=true "Optional Title")
+![Alt text](/MortgageCalculator/screenshots/main.png?raw=true "Optional Title" | width=100)
