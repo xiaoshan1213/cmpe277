@@ -3,7 +3,9 @@
     android:id="@+id/mortgage"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textColorHint="@android:color/black"
+    android:background="#b7b7b7">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -46,7 +48,8 @@
                 android:hint="city"
                 android:ems="10"
                 android:maxLength="15"
-                android:id="@+id/city" />
+                android:id="@+id/city"
+                android:backgroundTint="@android:color/background_dark"/>
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +89,8 @@
                 android:ems="10"
                 android:maxLength="5"
                 android:id="@+id/zipcode"
-                android:inputType="numberSigned" />
+                android:inputType="numberSigned"
+                android:backgroundTint="@android:color/background_dark"/>
 
         </LinearLayout>
 
@@ -106,7 +110,8 @@
         android:hint="street address"
         android:ems="10"
         android:maxLength="40"
-        android:id="@+id/streetAdds" />
+        android:id="@+id/streetAdds"
+        android:backgroundTint="@android:color/background_dark"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -130,7 +135,8 @@
                 android:ems="10"
                 android:maxLength="10"
                 android:id="@+id/propertyPrice"
-                android:inputType="numberSigned|numberDecimal" />
+                android:inputType="numberSigned|numberDecimal"
+                android:backgroundTint="@android:color/background_dark"/>
 
         </LinearLayout>
 
@@ -152,7 +158,8 @@
                 android:hint="dollar"
                 android:ems="10"
                 android:maxLength="10"
-                android:id="@+id/downPayment" />
+                android:id="@+id/downPayment"
+                android:backgroundTint="@android:color/background_dark"/>
 
         </LinearLayout>
 
@@ -173,7 +180,8 @@
                 android:hint="apr"
                 android:ems="10"
                 android:maxLength="5"
-                android:id="@+id/apr" />
+                android:id="@+id/apr"
+                android:backgroundTint="@android:color/background_dark"/>
         </LinearLayout>
 
     </LinearLayout>

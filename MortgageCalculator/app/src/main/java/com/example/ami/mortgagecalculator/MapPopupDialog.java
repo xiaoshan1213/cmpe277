@@ -1,4 +1,4 @@
-package com.example.sam.mortgagecalculator;
+package com.example.ami.mortgagecalculator;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,10 +17,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 /**
- * Created by sam on 3/18/17.
+ * Created by ami on 3/18/17.
  */
 
 public class MapPopupDialog extends Dialog {
@@ -31,19 +29,18 @@ public class MapPopupDialog extends Dialog {
     private MapPopupDialog mapPopupDialog = null;
     private MortgageHelper mortgageHelper;
 
-    private static final String LATITUDE = MortgageSchema.MortgageEntry.COLUMN_LATITUDE;
-    private static final String LONGITUDE = MortgageSchema.MortgageEntry.COLUMN_LONGITUDE;
-    private static final String LOAN = MortgageSchema.MortgageEntry.COLUMN_LOAN;
-    private static final String PROPERTY_TYPE = MortgageSchema.MortgageEntry.COLUMN_PROPERTY_TYPE;
-    private static final String CITY = MortgageSchema.MortgageEntry.COLUMN_CITY;
-    private static final String STATE = MortgageSchema.MortgageEntry.COLUMN_STATE;
-    private static final String STREET = MortgageSchema.MortgageEntry.COLUMN_STREET;
-    private static final String MONTHLY_PAY = MortgageSchema.MortgageEntry.COLUMN_MONTHLYPAY;
-    private static final String PROPERTY_PRICE = MortgageSchema.MortgageEntry.COLUMN_PROPERTY_PRICE;
-    private static final String DOWN_PAYMENT = MortgageSchema.MortgageEntry.COLUMN_DOWN_PAYMENT;
-    private static final String APR = MortgageSchema.MortgageEntry.COLUMN_APR;
-    private static final String YEARS = MortgageSchema.MortgageEntry.COLUMN_YEARS;
+    private static final String LOAN = MortgageSchema.MortgageEntry.LOAN;
+    private static final String PROPERTY_TYPE = MortgageSchema.MortgageEntry.PROPERTY_TYPE;
+    private static final String CITY = MortgageSchema.MortgageEntry.CITY;
+    private static final String STREET = MortgageSchema.MortgageEntry.STREET;
+    private static final String MONTHLY_PAY = MortgageSchema.MortgageEntry.MONTHLYPAY;
+    private static final String APR = MortgageSchema.MortgageEntry.APR;
     private static final String[] projection = MortgageSchema.projection;
+
+
+    public void setMapPopupDialog(MapPopupDialog m) {
+        this.mapPopupDialog = m;
+    }
 
     public MapPopupDialog(Activity activity, Bundle bundle) {
         super(activity);
@@ -53,42 +50,25 @@ public class MapPopupDialog extends Dialog {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
     }
 
-    public void setMapPopupDialog(MapPopupDialog m) {
-        this.mapPopupDialog = m;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_popup);
         Window window = this.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            wlp.gravity = Gravity.LEFT | Gravity.BOTTOM;
-        } else {
-            wlp.gravity = Gravity.BOTTOM;
-        }
-
-        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        window.setAttributes(wlp);
         this.setCancelable(true);
         Button btnEdit = (Button)this.findViewById(R.id.btnEdit);
         Button btnDelete = (Button)this.findViewById(R.id.btnDelete);
         Button btnCancel = (Button) this.findViewById(R.id.btnCancel);
-
-
         showText();
-
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                //add bundle user info
+
                 bundle.putString("PROPERTY_INFO", perprotyString);
                 bundle.putBoolean("FROM_EDIT", true);
 
-                //jump back to mortgage fragment to edit
                 MortgageFragment mortgageFragment = new MortgageFragment();
                 mortgageFragment.setArguments(bundle);
                 FragmentManager fragmentManager = activity.getFragmentManager();
@@ -98,6 +78,7 @@ public class MapPopupDialog extends Dialog {
 
             }
         });
+
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,18 +127,19 @@ public class MapPopupDialog extends Dialog {
     private void showText() {
 
         TextView tvapr = (TextView)this.findViewById(R.id.contentAPR);
-        TextView tvcity = (TextView)this.findViewById(R.id.contentCity);
         TextView tvloan = (TextView)this.findViewById(R.id.contentLoan);
-        TextView tvmp = (TextView)this.findViewById(R.id.contentMP); //monthly pay
         TextView tvpt = (TextView)this.findViewById(R.id.contentPT); //property type
         TextView tvsa = (TextView)this.findViewById(R.id.contentSA); //street addr
+        TextView tvcity = (TextView)this.findViewById(R.id.contentCity);
+        TextView tvmp = (TextView)this.findViewById(R.id.contentMP); //monthly pay
+
         try {
             JSONObject perportyJSONObject = new JSONObject(perprotyString);
             tvloan.setText(perportyJSONObject.getString(LOAN));
-            tvpt.setText(perportyJSONObject.getString(PROPERTY_TYPE));
-            tvcity.setText(perportyJSONObject.getString(CITY));
             tvsa.setText(perportyJSONObject.getString(STREET));
             tvmp.setText(perportyJSONObject.getString(MONTHLY_PAY));
+            tvpt.setText(perportyJSONObject.getString(PROPERTY_TYPE));
+            tvcity.setText(perportyJSONObject.getString(CITY));
             tvapr.setText(perportyJSONObject.getString(APR));
 
         } catch (JSONException e) {

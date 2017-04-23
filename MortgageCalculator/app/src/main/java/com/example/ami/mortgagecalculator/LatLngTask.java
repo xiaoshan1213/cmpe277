@@ -1,4 +1,4 @@
-package com.example.sam.mortgagecalculator;
+package com.example.ami.mortgagecalculator;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -56,7 +56,6 @@ public class LatLngTask extends AsyncTask {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("asynctask_res", jsonObject.toString());
         return jsonObject;
     }
 

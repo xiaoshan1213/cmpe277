@@ -1,4 +1,4 @@
-package com.example.sam.mortgagecalculator;
+package com.example.ami.mortgagecalculator;
 
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -28,26 +28,26 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by sam on 3/13/17.
+ * Created by ami on 3/13/17.
  */
 
 public class MortgageFragment extends Fragment implements View.OnClickListener{
     private View view;
     private int years = -1;
     private static final String[] projection = MortgageSchema.projection;
-    private static final String LATITUDE = MortgageSchema.MortgageEntry.COLUMN_LATITUDE;
-    private static final String LONGITUDE = MortgageSchema.MortgageEntry.COLUMN_LONGITUDE;
-    private static final String LOAN = MortgageSchema.MortgageEntry.COLUMN_LOAN;
-    private static final String PROPERTY_TYPE = MortgageSchema.MortgageEntry.COLUMN_PROPERTY_TYPE;
-    private static final String CITY = MortgageSchema.MortgageEntry.COLUMN_CITY;
-    private static final String STATE = MortgageSchema.MortgageEntry.COLUMN_STATE;
-    private static final String STREET = MortgageSchema.MortgageEntry.COLUMN_STREET;
-    private static final String MONTHLY_PAY = MortgageSchema.MortgageEntry.COLUMN_MONTHLYPAY;
-    private static final String PROPERTY_PRICE = MortgageSchema.MortgageEntry.COLUMN_PROPERTY_PRICE;
-    private static final String DOWN_PAYMENT = MortgageSchema.MortgageEntry.COLUMN_DOWN_PAYMENT;
-    private static final String APR = MortgageSchema.MortgageEntry.COLUMN_APR;
-    private static final String YEARS = MortgageSchema.MortgageEntry.COLUMN_YEARS;
-    private static final String ZIPCODE = MortgageSchema.MortgageEntry.COLUMN_ZIPCODE;
+    private static final String LATITUDE = MortgageSchema.MortgageEntry.LATITUDE;
+    private static final String LONGITUDE = MortgageSchema.MortgageEntry.LONGITUDE;
+    private static final String LOAN = MortgageSchema.MortgageEntry.LOAN;
+    private static final String PROPERTY_TYPE = MortgageSchema.MortgageEntry.PROPERTY_TYPE;
+    private static final String CITY = MortgageSchema.MortgageEntry.CITY;
+    private static final String STATE = MortgageSchema.MortgageEntry.STATE;
+    private static final String STREET = MortgageSchema.MortgageEntry.STREET;
+    private static final String MONTHLY_PAY = MortgageSchema.MortgageEntry.MONTHLYPAY;
+    private static final String PROPERTY_PRICE = MortgageSchema.MortgageEntry.PROPERTY_PRICE;
+    private static final String DOWN_PAYMENT = MortgageSchema.MortgageEntry.DOWN_PAYMENT;
+    private static final String APR = MortgageSchema.MortgageEntry.APR;
+    private static final String YEARS = MortgageSchema.MortgageEntry.YEARS;
+    private static final String ZIPCODE = MortgageSchema.MortgageEntry.ZIPCODE;
     private static final String ID = MortgageSchema.MortgageEntry._ID;
     private static final int ZIP_CODE_MAX = MortgageSchema.ZIP_CODE_MAX;
     private static final int ZIP_CODE_MIN = MortgageSchema.ZIP_CODE_MIN;
@@ -59,7 +59,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
     MortgageHelper mortgageHelper;
 
     public MortgageFragment() {
-        // Empty constructor required for fragment subclasses
     }
 
     @Override
@@ -84,7 +83,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId){
-                // checkedId is the RadioButton selected
                 if(checkedId == R.id.terms_15)
                     years = 15;
                 else
@@ -124,9 +122,9 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
             ((Spinner)view.findViewById(R.id.stateSpinner)).setSelection(position);
 
             ((EditText)view.findViewById(R.id.streetAdds)).setText(savedObject.getString(STREET));
+            ((EditText)view.findViewById(R.id.zipcode)).setText(savedObject.getString(ZIPCODE));
             ((EditText)view.findViewById(R.id.propertyPrice)).setText(savedObject.getString(PROPERTY_PRICE));
             ((EditText)view.findViewById(R.id.downPayment)).setText(savedObject.getString(DOWN_PAYMENT));
-            ((EditText)view.findViewById(R.id.zipcode)).setText(savedObject.getString(ZIPCODE));
 
             aprStr = savedObject.getString(APR);
             aprStr = String.valueOf(Float.parseFloat(aprStr));
@@ -140,16 +138,17 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
                 years = 30;
             }
 
-            if (-1 != Double.valueOf(savedObject.getString(MONTHLY_PAY))) {
-                ((TextView) view.findViewById(R.id.paymentholder)).setText("        " + savedObject.getString(MONTHLY_PAY));
-            }
-
             if (false == fromEdit) {
                 savedObject = null;
             }
 
-        } catch (JSONException e) {
+            if (-1 != Double.valueOf(savedObject.getString(MONTHLY_PAY))) {
+                ((TextView) view.findViewById(R.id.paymentholder)).setText("        " + savedObject.getString(MONTHLY_PAY));
+            }
 
+
+        } catch (JSONException e) {
+            // catch jsonexception
         }
 
 
@@ -157,30 +156,29 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
 
     private void refreshProCalInfo() throws JSONException {
 
+        perportyInfoJSON.put(APR, String.valueOf(Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString())));
+        perportyInfoJSON.put(LOAN, String.valueOf(-1));
+        perportyInfoJSON.put(YEARS, String.valueOf(years));
         perportyInfoJSON.put(PROPERTY_TYPE, ((Spinner)view.findViewById(R.id.propertySpinner)).getSelectedItem().toString());
+        perportyInfoJSON.put(MONTHLY_PAY, String.valueOf(-1));
+        perportyInfoJSON.put(PROPERTY_PRICE, ((EditText) view.findViewById(R.id.propertyPrice)).getText().toString());
+        perportyInfoJSON.put(DOWN_PAYMENT, ((EditText) view.findViewById(R.id.downPayment)).getText().toString());
         perportyInfoJSON.put(CITY, ((EditText)view.findViewById(R.id.city)).getText().toString());
         perportyInfoJSON.put(STATE, ((Spinner)view.findViewById(R.id.stateSpinner)).getSelectedItem().toString());
         perportyInfoJSON.put(STREET, ((EditText)view.findViewById(R.id.streetAdds)).getText().toString());
         perportyInfoJSON.put(ZIPCODE, ((EditText)view.findViewById(R.id.zipcode)).getText().toString());
-        perportyInfoJSON.put(MONTHLY_PAY, String.valueOf(-1));
-        perportyInfoJSON.put(PROPERTY_PRICE, ((EditText) view.findViewById(R.id.propertyPrice)).getText().toString());
-        perportyInfoJSON.put(DOWN_PAYMENT, ((EditText) view.findViewById(R.id.downPayment)).getText().toString());
         perportyInfoJSON.put(LATITUDE, String.valueOf(0));
         perportyInfoJSON.put(LONGITUDE, String.valueOf(0));
-        perportyInfoJSON.put(APR, String.valueOf(Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString())));
-        perportyInfoJSON.put(LOAN, String.valueOf(-1));
-        perportyInfoJSON.put(YEARS, String.valueOf(years));
 
     }
     
     private void refreshCalInfoOnly() throws JSONException {
-        
-        perportyInfoJSON.put(MONTHLY_PAY, String.valueOf(-1));
-        perportyInfoJSON.put(PROPERTY_PRICE, ((EditText) view.findViewById(R.id.propertyPrice)).getText().toString());
         perportyInfoJSON.put(DOWN_PAYMENT, ((EditText) view.findViewById(R.id.downPayment)).getText().toString());
         perportyInfoJSON.put(APR, String.valueOf(Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString())));
         perportyInfoJSON.put(LOAN, String.valueOf(-1));
         perportyInfoJSON.put(YEARS, String.valueOf(years));
+        perportyInfoJSON.put(MONTHLY_PAY, String.valueOf(-1));
+        perportyInfoJSON.put(PROPERTY_PRICE, ((EditText) view.findViewById(R.id.propertyPrice)).getText().toString());
     }
 
     private boolean checkProCalInfo() {
@@ -188,19 +186,19 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
 
         if (false == checkCalInfo()) { return false; }
 
-        if (0 == ((Spinner) view.findViewById(R.id.propertySpinner)).getSelectedItem().toString().length()) { return false; }
+        if (((Spinner) view.findViewById(R.id.propertySpinner)).getSelectedItem().toString().length()==0) { return false; }
 
-        if (0 == ((EditText) view.findViewById(R.id.city)).getText().toString().length()) {
+        if (((EditText) view.findViewById(R.id.city)).getText().toString().length()==0) {
             alertDialog("Please input a city.");
             return false;
         }
-        if (0 == ((Spinner) view.findViewById(R.id.stateSpinner)).getSelectedItem().toString().length()) { return false; }
-        if (0 == ((EditText) view.findViewById(R.id.streetAdds)).getText().toString().length()) {
+        if (((Spinner) view.findViewById(R.id.stateSpinner)).getSelectedItem().toString().length()==0) { return false; }
+        if (((EditText) view.findViewById(R.id.streetAdds)).getText().toString().length()==0) {
             alertDialog("Please input a street.");
             return false;
         }
 
-        if (0 == ((EditText) view.findViewById(R.id.zipcode)).getText().toString().length()) {
+        if (((EditText) view.findViewById(R.id.zipcode)).getText().toString().length()==0) {
             alertDialog("Please input a zip code.");
             return false;
         }
@@ -223,17 +221,17 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         float downPayment = 0;
         float apr = 0;
 
-        if (0 == ((EditText) view.findViewById(R.id.propertyPrice)).getText().toString().length()) {
+        if (((EditText) view.findViewById(R.id.propertyPrice)).getText().toString().length()==0) {
             alertDialog("Please input property price.");
             return false;
         }
 
-        if (0 == ((EditText) view.findViewById(R.id.downPayment)).getText().toString().length()) {
+        if (((EditText) view.findViewById(R.id.downPayment)).getText().toString().length()==0) {
             alertDialog("Please input down payment.");
             return false;
         }
 
-        if (0 == ((EditText) view.findViewById(R.id.apr)).getText().toString().length()) {
+        if (((EditText) view.findViewById(R.id.apr)).getText().toString().length()==0) {
             alertDialog("Please input APR.");
             return false;
         }
@@ -242,11 +240,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         downPayment = Float.parseFloat(((EditText) view.findViewById(R.id.downPayment)).getText().toString());
         apr = Float.parseFloat(((EditText) view.findViewById(R.id.apr)).getText().toString());
 
-      /*  if (apr) {
-            alertDialog("APR cannot exceed 100%.");
-            return false;
-        }
-*/
         if (downPayment > propertyPrice) {
             alertDialog("Down payment cannot be larger than property price.");
             return false;
@@ -270,7 +263,7 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
             switch (v.getId()) {
                 case R.id.btnCalculate:
 
-                    if (false == checkCalInfo()) { return; }
+                    if (checkCalInfo()==false) { return; }
                     refreshCalInfoOnly();
 
                     monthlypay = handleCalculate(view);
@@ -281,7 +274,7 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
                     break;
 
                 case R.id.btnSaveProperty:
-                    if (false == checkProCalInfo()) { return; }
+                    if (checkProCalInfo()==false) { return; }
                     refreshProCalInfo();
                     handleCalculate(view);
                     saveProperty(view);
@@ -367,7 +360,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
 
         ContentValues values = getContentValues();
 
-        // Insert the new row, returning the primary key value of the new row
         db.insertWithOnConflict(MortgageSchema.MortgageEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
         Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
@@ -387,6 +379,17 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
     }
 
 
+
+    private String getAddr() throws JSONException{
+        String streetWithoutSpace = (perportyInfoJSON.getString(STREET)).replaceAll(" ", "%20");
+        String cityWithoutSpace = (perportyInfoJSON.getString(CITY)).replaceAll(" ", "%20");
+        String state = perportyInfoJSON.getString(STATE);
+        String zipcode = perportyInfoJSON.getString(ZIPCODE);
+        String addr = streetWithoutSpace + "+" + cityWithoutSpace + "+" + state + "+" + zipcode;
+
+        return addr;
+
+    }
 
     private boolean checkResults(JSONObject res) throws JSONException{
         JSONArray addressComponents = null;
@@ -416,16 +419,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    private String getAddr() throws JSONException{
-        String streetWithoutSpace = (perportyInfoJSON.getString(STREET)).replaceAll(" ", "%20");
-        String cityWithoutSpace = (perportyInfoJSON.getString(CITY)).replaceAll(" ", "%20");
-        String state = perportyInfoJSON.getString(STATE);
-        String zipcode = perportyInfoJSON.getString(ZIPCODE);
-        String addr = streetWithoutSpace + "+" + cityWithoutSpace + "+" + state + "+" + zipcode;
-
-        return addr;
-
-    }
 
     private ContentValues getContentValues() throws JSONException{
 
@@ -465,6 +458,18 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
 
     }
 
+
+    private void setNegativeButton(AlertDialog.Builder builder) {
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     private void newDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Unsaved changes will be discarded");
@@ -483,16 +488,6 @@ public class MortgageFragment extends Fragment implements View.OnClickListener{
         builder.create().show();
     }
 
-    private void setNegativeButton(AlertDialog.Builder builder) {
-
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-    }
 
     private void alertDialog(String message) {
 

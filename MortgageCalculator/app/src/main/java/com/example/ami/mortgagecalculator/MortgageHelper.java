@@ -1,11 +1,11 @@
-package com.example.sam.mortgagecalculator;
+package com.example.ami.mortgagecalculator;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by sam on 3/16/17.
+ * Created by ami on 3/16/17.
  */
 
 public class MortgageHelper extends SQLiteOpenHelper {

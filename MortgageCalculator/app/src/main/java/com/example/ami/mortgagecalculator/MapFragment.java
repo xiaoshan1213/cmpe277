@@ -1,4 +1,4 @@
-package com.example.sam.mortgagecalculator;
+package com.example.ami.mortgagecalculator;
 
 import android.app.Fragment;
 import android.database.Cursor;
@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by sam on 3/17/17.
+ * Created by ami on 3/17/17.
  */
 
 public class MapFragment extends Fragment {
@@ -38,23 +37,15 @@ public class MapFragment extends Fragment {
     private GoogleMap googleMap;
     private MapView mapView;
     private HashMap<Marker, String> markerMap;
-    private static final int REQUEST_LOCATION = 1;
     private static final String[] PROJECTION = MortgageSchema.projection;
     MapPopupDialog mapPopupDialog;
 
     public static final int PROPERTY_TYPE_INDEX = MortgageSchema.COLUMN_PROPERTY_TYPE_INDEX;
     public static final int STREET_INDEX = MortgageSchema.COLUMN_STREET_INDEX;
     public static final int CITY_INDEX = MortgageSchema.COLUMN_CITY_INDEX;
-    public static final int STATE_INDEX = MortgageSchema.COLUMN_STATE_INDEX;
-    public static final int ZIPCODE_INDEX = MortgageSchema.COLUMN_ZIPCODE_INDEX;
-    public static final int APR_INDEX = MortgageSchema.COLUMN_APR_INDEX;
-    public static final int MONTHLYPAY_INDEX = MortgageSchema.COLUMN_MONTHLYPAY_INDEX;
     public static final int LATITUDE_INDEX = MortgageSchema.COLUMN_LATITUDE_INDEX;
     public static final int LONGITUDE_INDEX = MortgageSchema.COLUMN_LONGITUDE_INDEX;
-    public static final int LOAN_INDEX = MortgageSchema.COLUMN_LOAN_INDEX;
-    public static final int PROPERTY_PRICE_INDEX = MortgageSchema.COLUMN_PROPERTY_PRICE_INDEX;
-    public static final int DOWN_PAYMENT_INDEX = MortgageSchema.COLUMN_DOWN_PAYMENT_INDEX;
-    public static final int YEARS_INDEX = MortgageSchema.COLUMN_YEARS_INDEX;
+
 
 
     @Override
@@ -65,7 +56,7 @@ public class MapFragment extends Fragment {
         this.db = mortgageHelper.getReadableDatabase();
         mapView = (MapView) rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.onResume(); // needed to get the map to display immediately
+        mapView.onResume();
         Log.d("mapview", "oncreateview");
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -103,7 +94,6 @@ public class MapFragment extends Fragment {
                 if (cursor.moveToFirst())
                 {
                     do {
-                        List<String> listitem = new ArrayList<String>();
                         Log.d("cursor_mapview", cursor.getString(1));
                         LatLng res = new LatLng(Double.parseDouble(cursor.getString(LATITUDE_INDEX)),
                                                 Double.parseDouble(cursor.getString(LONGITUDE_INDEX)));
@@ -116,7 +106,6 @@ public class MapFragment extends Fragment {
                                         "," + cursor.getString(CITY_INDEX)));
                         markerMap.put(m, json.toString());
                         googleMap.getUiSettings().setZoomControlsEnabled(true);
-                        // For zooming automatically to the location of the marker
                         CameraPosition cameraPosition = new CameraPosition.Builder().target(res).zoom(12).build();
                         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     } while (cursor.moveToNext());
@@ -125,10 +114,10 @@ public class MapFragment extends Fragment {
             }
         });
 
-
         return rootView;
 
     }
+
     private JSONObject getJSONObject(Cursor c) {
 
         try {
